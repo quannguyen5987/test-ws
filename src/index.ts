@@ -13,18 +13,13 @@ import {connectSocket} from "./socket/SocketClient";
 Logger.info('Staring...');
 
 async function init() {
-
-    const wss = new WebSocket.Server({port: 8081});
-    wss.on('connection', function connection(ws: any) {
-        ws.on('message', function incoming(message: any) {
-            console.log('received: %s', message);
-        });
-        setInterval(() => {
-            ws.send('gui tu server');
-        }, 1000);
-
-    });
-    wss.on('error', console.error);
+    // Kafka.create(conf, conf.kafkaConsumerOptions, true,
+    //     conf.kafkaTopicOptions, conf.kafkaProducerOptions, () => {
+    //         Logger.info(`finish init kafka`);
+    //         console.log('finish init kafka')
+    //     });
+    // TradexNotification.create(Kafka.getInstance());
+    await connectSocket();
 }
 
 init()
